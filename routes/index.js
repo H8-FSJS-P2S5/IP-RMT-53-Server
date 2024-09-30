@@ -8,7 +8,7 @@ const ReviewController = require('../controllers/ReviewController');
 
 // User routes
 router.post('/api/register', UserController.register); // Register a new user
-// router.post('/api/login', UserController.login); // Authenticate user
+router.post('/api/login', UserController.login); // Authenticate user
 
 // Anime List routes
 // router.get('/api/user/:id/anime-list', AnimeListController.getAnimeList); // Retrieve user's anime list

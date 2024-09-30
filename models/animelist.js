@@ -1,7 +1,5 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class AnimeList extends Model {
     /**
@@ -11,14 +9,25 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      AnimeList.belongsTo(models.User, {
+        foreignKey: "userId",
+        onDelete: "CASCADE",
+      });
+      AnimeList.belongsTo(models.Anime, {
+        foreignKey: "animeId",
+        onDelete: "CASCADE",
+      });
     }
   }
-  AnimeList.init({
-    userId: DataTypes.INTEGER,
-    animeId: DataTypes.INTEGER
-  }, {
-    sequelize,
-    modelName: 'AnimeList',
-  });
+  AnimeList.init(
+    {
+      userId: DataTypes.INTEGER,
+      animeId: DataTypes.INTEGER,
+    },
+    {
+      sequelize,
+      modelName: "AnimeList",
+    }
+  );
   return AnimeList;
 };

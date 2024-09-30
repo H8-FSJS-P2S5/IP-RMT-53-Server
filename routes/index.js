@@ -1,10 +1,10 @@
 const router = require('express').Router()
 
-const UserController = require('./controllers/UserController');
-const AnimeListController = require('./controllers/AnimeListController');
-const AnimeController = require('./controllers/AnimeController');
-const RatingController = require('./controllers/RatingController');
-const ReviewController = require('./controllers/ReviewController');
+const UserController = require('../controllers/UserController');
+const AnimeListController = require('../controllers/AnimeListController');
+const AnimeController = require('../controllers/AnimeController');
+const RatingController = require('../controllers/RatingController');
+const ReviewController = require('../controllers/ReviewController');
 
 // User routes
 router.post('/api/register', UserController.register); // Register a new user

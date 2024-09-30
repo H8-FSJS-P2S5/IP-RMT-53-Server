@@ -10,19 +10,25 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       malId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: false, 
+        unique: true 
       },
       title: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false 
       },
       synopsis: {
-        type: Sequelize.TEXT
+        type: Sequelize.TEXT,
+        allowNull: true 
       },
       imageUrl: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: true 
       },
       score: {
-        type: Sequelize.FLOAT
+        type: Sequelize.FLOAT,
+        allowNull: true
       },
       createdAt: {
         allowNull: false,

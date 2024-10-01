@@ -14,7 +14,7 @@ router.post('/api/google-login', UserController.googleLogin); // Google login
 
 // Anime List routes
 router.get('/api/user/:id/anime-list', AnimeListController.getAnimeList); // Retrieve user's anime list
-// router.post('/api/user/:id/anime-list', AnimeListController.addAnime); // Add an anime to the user's list
+router.post('/api/user/:id/anime-list', AnimeListController.addAnimeToList); // Add an anime to the user's list
 // router.delete('/api/user/:id/anime-list/:animeId', AnimeListController.removeAnime); // Remove an anime from the user's list
 
 // Anime routes

@@ -7,22 +7,22 @@ const errorHandler = (err, req, res, next) => {
     } else if (err.name === 'UnauthorizedError') {
       res.status(401).json({
         error: 'Invalid credentials',
-        message: 'Email or password is incorrect'
+        message: err.message || 'Email or password is incorrect'
       });
     } else if (err.name === 'AuthenticationError') {
       res.status(401).json({
         error: 'Authentication Error',
-        message: 'You need to log in to access this resource'
+        message: err.message || 'You need to log in to access this resource'
       });
     } else if (err.name === 'ForbiddenError') {
       res.status(403).json({
         error: 'Forbidden Access',
-        message: 'You do not have permission to access this resource'
+        message: err.message || 'You do not have permission to access this resource'
       });
     } else if (err.name === 'NotFoundError') {
       res.status(404).json({
         error: 'Resource Not Found',
-        message: 'The requested data was not found'
+        message: err.message || 'The requested data was not found'
       });
     } else {
       // Default to 500 Internal Server Error

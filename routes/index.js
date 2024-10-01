@@ -5,10 +5,12 @@ const AnimeListController = require('../controllers/AnimeListController');
 const AnimeController = require('../controllers/AnimeController');
 const RatingController = require('../controllers/RatingController');
 const ReviewController = require('../controllers/ReviewController');
+const errorHandler = require('../middlewares/errorHandler');
 
 // User routes
 router.post('/api/register', UserController.register); // Register a new user
 router.post('/api/login', UserController.login); // Authenticate user
+router.post('/api/google-login', UserController.googleLogin); // Google login
 
 // Anime List routes
 // router.get('/api/user/:id/anime-list', AnimeListController.getAnimeList); // Retrieve user's anime list
@@ -24,5 +26,8 @@ router.post('/api/login', UserController.login); // Authenticate user
 
 // Review routes
 // router.post('/api/user/:id/anime/:animeId/review', ReviewController.submitReview); // Submit a review
+// router.put('/api/user/:id/anime/:animeId/review', ReviewController.updateReview); // Update a review
+
+router.use(errorHandler)
 
 module.exports = router;

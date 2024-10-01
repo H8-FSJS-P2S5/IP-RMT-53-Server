@@ -53,6 +53,41 @@ class AnimeListController {
       next(error);
     }
   }
+
+  static async removeAnimeFromList(req, res, next) {
+    const { id: userId } = req.params; 
+    const { animeId } = req.params; 
+
+    try {
+      
+      const animeListEntry = await AnimeList.findOne({
+        where: {
+          userId,
+          animeId,
+        },
+      });
+
+      if (!animeListEntry) {
+        const err = new Error("Anime not found in your list");
+        err.name = "NotFoundError";
+        throw err;
+      }
+
+     
+      await AnimeList.destroy({
+        where: {
+          userId,
+          animeId,
+        },
+      });
+
+      res.status(200).json({
+        message: "Anime removed from your list successfully",
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 module.exports = AnimeListController;

@@ -7,12 +7,15 @@ const RatingController = require('../controllers/RatingController');
 const ReviewController = require('../controllers/ReviewController');
 const errorHandler = require('../middlewares/errorHandler');
 const jikanRateLimiter = require('../middlewares/jikanRateLimiter');
+const authentication = require('../middlewares/authentication');
 
 
 // User routes
 router.post('/api/register', UserController.register); // Register a new user
 router.post('/api/login', UserController.login); // Authenticate user
 router.post('/api/google-login', UserController.googleLogin); // Google login
+
+router.use(authentication)
 
 // Anime List routes
 router.get('/api/user/:id/anime-list', AnimeListController.getAnimeList); // Retrieve user's anime list

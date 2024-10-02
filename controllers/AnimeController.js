@@ -10,23 +10,24 @@ class AnimeController {
         params: { q },
       });
 
-      const animeList = data.data.map(async (anime) => {
+      const animeList = await Promise.all(data.data.map(async (anime) => {
         const existingAnime = await Anime.findOne({
-          where: { mal_id: anime.mal_id },
+          where: { malId: anime.mal_id }, 
         });
 
         if (!existingAnime) {
           await Anime.create({
-            mal_id: anime.mal_id,
+            malId: anime.mal_id, 
             title: anime.title,
-            genre: anime.genre.name,
+            genre: anime.genres.map(g => g.name).join(', '),
             synopsis: anime.synopsis,
             episodes: anime.episodes,
-            image_url: anime.images.jpg.image_url,
+            imageUrl: anime.images.jpg.image_url, 
             score: anime.score,
           });
         }
-      });
+        return anime; 
+      }));
 
       res.status(200).json({
         message: "Anime data fetched and stored from jikan.moe successfully",
@@ -41,7 +42,7 @@ class AnimeController {
     const { id } = req.params;
     try {
       const response = await axios.get(`https://api.jikan.moe/v4/anime/${id}`);
-      res.json(response.data.data);
+      res.status(200).json(response.data.data);
     } catch (error) {
       next(error);
     }

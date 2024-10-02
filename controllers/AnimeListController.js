@@ -1,4 +1,4 @@
-const { AnimeList, Anime } = require("../models");
+const { AnimeList, Anime, User } = require("../models");
 
 class AnimeListController {
   static async getAnimeList(req, res, next) {
@@ -32,6 +32,12 @@ class AnimeListController {
       
       const anime = await Anime.findOne({ where: { malId } });
 
+      const user = await User.findByPk(id); // Assuming you have a User model  
+        if (!user) {  
+            const err = new Error("User not found");  
+            err.name = "NotFoundError";  
+            throw err;  
+        }
       
       if (!anime) {
         const err = new Error("No anime list found in the database");

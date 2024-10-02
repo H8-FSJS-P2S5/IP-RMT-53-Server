@@ -6,6 +6,8 @@ const AnimeController = require('../controllers/AnimeController');
 const RatingController = require('../controllers/RatingController');
 const ReviewController = require('../controllers/ReviewController');
 const errorHandler = require('../middlewares/errorHandler');
+const jikanRateLimiter = require('../middlewares/jikanRateLimiter');
+
 
 // User routes
 router.post('/api/register', UserController.register); // Register a new user
@@ -18,8 +20,8 @@ router.post('/api/user/:id/anime-list', AnimeListController.addAnimeToList); // 
 router.delete('/api/user/:id/anime-list/:animeId', AnimeListController.removeAnimeFromList); // Remove an anime from the user's list
 
 // Anime routes
-// router.get('/anime/search', AnimeController.searchAnime); // Search anime via Jikan API
-// router.get('/anime/:id', AnimeController.getAnimeDetails); // Grab detailed information for a specific anime
+router.get('/anime/search', jikanRateLimiter, AnimeController.searchAnime); // Search anime via Jikan API
+router.get('/anime/:id', jikanRateLimiter, AnimeController.getAnimeDetails); // Grab detailed information for a specific anime
 
 // Rating routes
 // router.post('/api/user/:id/anime/:animeId/rate', RatingController.rateAnime); // Rate an anime

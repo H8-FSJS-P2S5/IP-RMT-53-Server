@@ -27,7 +27,9 @@ module.exports = (sequelize, DataTypes) => {
     {
       malId: DataTypes.INTEGER,
       title: DataTypes.STRING,
+      genre: DataTypes.STRING,
       synopsis: DataTypes.TEXT,
+      episodes: DataTypes.INTEGER,
       imageUrl: DataTypes.STRING,
       score: DataTypes.FLOAT,
     },

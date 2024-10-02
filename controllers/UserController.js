@@ -1,8 +1,9 @@
-const { comparePassword } = require("../helpers/bcrypt");
+const { comparePassword, hashPassword } = require("../helpers/bcrypt");
 const { createToken } = require("../helpers/jwt");
 const { User } = require("../models");
 const { OAuth2Client } = require("google-auth-library");
 const client = new OAuth2Client();
+
 
 class UserController {
   static async register(req, res, next) {
@@ -19,7 +20,7 @@ class UserController {
         email: newUser.email,
       });
     } catch (error) {
-      next(error); // Send the error to errorHandler
+      next(error); 
     }
   }
 
@@ -60,7 +61,7 @@ class UserController {
         email: user.email,
       });
     } catch (error) {
-      next(error); // Passes the error to errorHandler
+      next(error);
     }
   }
 
@@ -78,9 +79,9 @@ class UserController {
 
       if (!user) {
         user = await User.create({
-          name: payload.name,
+          username: payload.name,
           email: payload.email,
-          password: String(Math.floor(Math.random() * 1e12)),
+          password: hashPassword(String(Math.floor(Math.random() * 1e12))),
         },
         {
           hooks: false
@@ -99,7 +100,7 @@ class UserController {
         email: user.email,
       });
     } catch (error) {
-      next(error); // Send any errors to the error handler
+      next(error); 
     }
   }
 }

@@ -18,8 +18,16 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false 
       },
+      genre: {
+        type: Sequelize.STRING,
+        allowNull: true
+      },
       synopsis: {
         type: Sequelize.TEXT,
+        allowNull: true 
+      },
+      episodes: {
+        type: Sequelize.INTEGER,
         allowNull: true 
       },
       imageUrl: {

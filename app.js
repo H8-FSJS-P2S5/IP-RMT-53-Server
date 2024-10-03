@@ -14,7 +14,7 @@ app.use(
   })
 );
 
-app.set('trust proxy', true); // or 'trust proxy', 1 for single proxy
+app.set('trust proxy', 1); // Trust only the first proxy
 
 app.use(express.urlencoded({ extended: false }));
 

@@ -8,7 +8,6 @@ class ChatbotController {
           // Fetch the recommendation using the gemini function  
           const recommendation = await geminiRecommendation(prompt);  
     
-          console.log(recommendation)
           // Send back a success response  
           res.status(200).json({  
             message: "Recommendation fetched successfully",  

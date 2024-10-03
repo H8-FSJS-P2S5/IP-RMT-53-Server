@@ -8,7 +8,7 @@ class AnimeListController {
         where: { userId },
         include: {
           model: Anime,
-          attributes: ["malId", "title", "synopsis", "imageUrl", "score"],
+          attributes: ["malId", "title", "genre", "synopsis", "episodes", "imageUrl", "score"],
         },
       });
       res.status(200).json(readAniList);

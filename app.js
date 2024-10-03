@@ -10,7 +10,7 @@ app.use(express.json());
 
 app.use(cors());
 
-app.set('trust proxy', 1); // Trust only the first proxy
+app.set('trust proxy', '13.54.158.99'); // Trust only the first proxy
 
 app.use(express.urlencoded({ extended: false }));
 

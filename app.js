@@ -8,11 +8,7 @@ var cors = require("cors");
 
 app.use(express.json());
 
-app.use(
-  cors({
-    origin: "*", // Allows all origins
-  })
-);
+app.use(cors());
 
 app.set('trust proxy', 1); // Trust only the first proxy
 

@@ -9,6 +9,7 @@ const errorHandler = require('../middlewares/errorHandler');
 const jikanRateLimiter = require('../middlewares/jikanRateLimiter');
 const authentication = require('../middlewares/authentication');
 const ChatbotController = require('../controllers/ChatbotController');
+const UserAuthorization = require('../middlewares/authorization');
 
 
 // User routes
@@ -28,11 +29,14 @@ router.post('/api/recommendation', ChatbotController.getAnimeRecommendation);
 
 router.use(authentication)
 
-// Anime List routes
-router.get('/api/user/:id/anime-list', AnimeListController.getAnimeList); // Retrieve user's anime list
-router.post('/api/user/:id/anime-list', AnimeListController.addAnimeToList); // Add an anime to the user's list
-router.delete('/api/user/:id/anime-list/:animeId', AnimeListController.removeAnimeFromList); // Remove an anime from the user's list
+// User Profile routes
+router.get('/api/user/me', UserController.getUserProfile); // Fetch user profile information
+router.put('/api/user/me/username', UserController.updateUsername); // PUT endpoint for updating username
 
+// Anime List routes
+router.get('/api/user/me/anime-list', AnimeListController.getAnimeList); // Retrieve current user's anime list
+router.delete('/api/user/me/anime-list/:animeId', AnimeListController.removeAnimeFromList); // Remove an anime from the current user's list
+router.post('/api/user/me/anime-list', AnimeListController.addAnimeToList); // Add an anime to the current user's list
 
 
 // Rating routes

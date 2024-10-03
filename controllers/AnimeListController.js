@@ -1,17 +1,16 @@
-const { AnimeList, Anime, User } = require("../models");
+const { AnimeList, Anime } = require('../models'); 
 
 class AnimeListController {
   static async getAnimeList(req, res, next) {
-    const { id } = req.params;
+    const userId = req.user.id; // Use the authenticated user's ID
     try {
       const readAniList = await AnimeList.findAll({
-        where: { userId: id },
+        where: { userId },
         include: {
           model: Anime,
-          attributes: ["malId", "title", "synopsis", "imageUrl", "score"], // Select only necessary fields
+          attributes: ["malId", "title", "synopsis", "imageUrl", "score"],
         },
       });
-
       res.status(200).json(readAniList);
     } catch (error) {
       next(error);
@@ -19,28 +18,20 @@ class AnimeListController {
   }
 
   static async addAnimeToList(req, res, next) {
-    const { id } = req.params; 
     const { malId } = req.body; 
+    const userId = req.user.id; 
 
     try {
-      
       const anime = await Anime.findOne({ where: { malId } });
 
-      const user = await User.findByPk(id); // Assuming you have a User model  
-        if (!user) {  
-            const err = new Error("User not found");  
-            err.name = "NotFoundError";  
-            throw err;  
-        }
-      
       if (!anime) {
-        const err = new Error("No anime list found in the database");
+        const err = new Error("No anime found in the database");
         err.name = "NotFoundError";
         throw err;
       }
 
       const newAnimeListEntry = await AnimeList.create({
-        userId: id, 
+        userId, 
         animeId: anime.id, 
       });
 
@@ -55,11 +46,10 @@ class AnimeListController {
   }
 
   static async removeAnimeFromList(req, res, next) {
-    const { id: userId } = req.params; 
     const { animeId } = req.params; 
+    const userId = req.user.id; 
 
     try {
-      
       const animeListEntry = await AnimeList.findOne({
         where: {
           userId,
@@ -73,7 +63,6 @@ class AnimeListController {
         throw err;
       }
 
-     
       await AnimeList.destroy({
         where: {
           userId,

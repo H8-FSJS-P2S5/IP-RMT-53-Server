@@ -21,41 +21,50 @@ module.exports = (sequelize, DataTypes) => {
   }
 
   User.init(
-    {
-      username: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-          notEmpty: { msg: "Username is required." },
-          len: {
-            args: [3, 20],
-            msg: "Username must be between 3 and 20 characters.",
-          },
-        },
-      },
-      email: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-          notEmpty: { msg: "Email is required." },
-          isEmail: {
-            msg: "Email must be a valid email address.",
-          },
-        },
-      },
-      password: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-          notEmpty: { msg: "Password is required." },
-          len: {
-            args: [6, 100],
-            msg: "Password must be at least 6 characters long.",
-          },
-        },
-      },
-    },
-    {
+    {  
+      username: {  
+        type: DataTypes.STRING,  
+        allowNull: false,  
+        validate: {  
+          notEmpty: { msg: "Username is required." },  
+          len: {  
+            args: [3, 20],  
+            msg: "Username must be between 3 and 20 characters.",  
+          },  
+          notNull: {  
+            msg: "Username cannot be null."  
+          }  
+        },  
+      },  
+      email: {  
+        type: DataTypes.STRING,  
+        allowNull: false,  
+        validate: {  
+          notEmpty: { msg: "Email is required." },  
+          isEmail: {  
+            msg: "Email must be a valid email address.",  
+          },  
+          notNull: {  
+            msg: "Email cannot be null."  
+          }  
+        },  
+      },  
+      password: {  
+        type: DataTypes.STRING,  
+        allowNull: false,  
+        validate: {  
+          notEmpty: { msg: "Password is required." },  
+          len: {  
+            args: [6, 100],  
+            msg: "Password must be at least 6 characters long.",  
+          },  
+          notNull: {  
+            msg: "Password cannot be null."  
+          }  
+        },  
+      },  
+    },  
+    {  
       sequelize,
       modelName: "User",
       hooks: {

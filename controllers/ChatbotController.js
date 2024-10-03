@@ -10,7 +10,7 @@ class ChatbotController {
     
           // Send back a success response  
           res.status(200).json({  
-            message: "Recommendation fetched successfully",  
+            message: "Gemini AI Chatbot replied successfully",  
             recommendation,  
           });  
         } catch (error) {  

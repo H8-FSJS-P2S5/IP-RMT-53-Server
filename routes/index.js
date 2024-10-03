@@ -21,8 +21,8 @@ router.post('/api/google-login', UserController.googleLogin); // Google login
 router.post('/api/chat', ChatbotController.getAnimeRecommendation);
 
 // Anime routes
-router.get('/anime/search', jikanRateLimiter, AnimeController.searchAnime); // Search anime via Jikan API
-router.get('/anime/:id', jikanRateLimiter, AnimeController.getAnimeDetails); // Grab detailed information for a specific anime
+router.get('/anime/search',  AnimeController.searchAnime); // Search anime via Jikan API
+router.get('/anime/:id',  AnimeController.getAnimeDetails); // Grab detailed information for a specific anime
 
 // Route for fetching the anime recommendation
 router.post('/api/recommendation', ChatbotController.getAnimeRecommendation);

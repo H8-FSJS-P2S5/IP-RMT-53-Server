@@ -1,0 +1,30 @@
+[
+  {
+    "userId": 1,
+    "monsterId": 10
+  },
+  {
+    "userId": 2,
+    "monsterId": 21
+  },
+  {
+    "userId": 2,
+    "monsterId": 22
+  },
+  {
+    "userId": 2,
+    "monsterId": 23
+  },
+  {
+    "userId": 3,
+    "monsterId": 31
+  },
+  {
+    "userId": 3,
+    "monsterId": 32
+  },
+  {
+    "userId": 3,
+    "monsterId": 33
+  }
+]

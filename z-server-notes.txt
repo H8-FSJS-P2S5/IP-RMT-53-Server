@@ -1,0 +1,128 @@
+Tabel User
+id: primary
+username: string 
+email: string (validation: required, unique, email format)
+password: string (validation: required, length min 6) hash
+role: string (default: Staff)
+
+Tabel Monster
+id: primary
+name: string (validation:required)
+types: string (validation:required)
+species: string (validation:required)
+description: string (validation:required)
+
+Tabel Image
+id: primary
+monsterId: integer (validation:required)
+imageUrl: string
+
+Tabel UserFavorite
+id: primary
+userId: integer (validation:required)
+monsterId: integer (validation:required)
+
+npm init -y
+bikin file: .gitignore isinya node_modules
+npm i pg sequelize
+npm i -D sequelize-cli
+npx sequelize-cli init
+
+npx sequelize-cli db:create
+
+npx sequelize-cli model:generate --name User --attributes username:string,email:string,password:string,role:string
+
+npx sequelize-cli model:generate --name Monster --attributes type:string,species:string,name:string,description:string
+
+npx sequelize-cli model:generate --name Image --attributes monsterId:integer,imageUrl:string
+
+npx sequelize-cli model:generate --name UserFavorite --attributes userId:integer,monsterId:integer
+
+npx sequelize db:migrate
+npx sequelize db:migrate:undo:all
+
+npx sequelize db:migrate --name 1-create-user.js && npx sequelize db:migrate --name 3-create-image.js && npx sequelize db:migrate --name 4-create-user-favorite.js
+
+npx sequelize db:migrate:undo --name 4-create-user-favorite.js && npx sequelize db:migrate:undo --name 3-create-image.js && npx sequelize db:migrate:undo --name 1-create-user.js
+
+npx sequelize-cli seed:generate --name seed-User
+npx sequelize-cli seed:generate --name seed-Monster
+npx sequelize-cli seed:generate --name seed-Image
+npx sequelize-cli seed:generate --name seed-UserFavorite
+
+npx sequelize db:seed:all
+npx sequelize db:seed:undo:all
+
+npx sequelize db:seed --seed 1-seed-Monster.js
+npx sequelize db:seed --seed 2-seed-json.js
+npx sequelize db:seed:undo --seed 2-seed-json.js
+
+===============================================================================
+
+npx sequelize-cli db:create --env test
+npx sequelize-cli db:migrate --env test
+npx sequelize-cli db:seed:all --env test
+
+untuk bikin dari awal:
+npx sequelize-cli db:migrate:undo:all --env test
+npx sequelize-cli db:seed:undo:all --env test
+
+untuk menampilkan detail test:
+"test": "npx jest --detectOpenHandles --verbose --forceExit",
+
+untuk menampilkan total hasil test:
+"test": "npx jest --verbose --detectOpenHandles --forceExit --runInBand --silent"
+
+npx jest createCuisine.test.js
+npx jest deleteCuisine.test.js
+npx jest getPubAllCuisine.test.js
+npx jest getPubOneCuisine.test.js
+npx jest login.test.js
+npx jest updateCuisine.test.js
+
+===============================================================================
+
+
+redux
+generate artificial intel
+google login
+
+
+{
+    "data": [
+        {
+            "id": 28,
+            "type": "large",
+            "species": "flying wyvern",
+            "name": "Diablos",
+            "description": "The apex monster of the Wildspire Waste.\nA menacing, territorial beast that lurks underground.\nLoud noises will cause it to lunge out of the sand in search of prey.",
+            "imageUrl": "https://static.wikia.nocookie.net/monsterhunterworld_gamepedia_en/images/0/0f/MHW_Diablos_Icon.png"
+        },
+        {
+            "id": 29,
+            "type": "large",
+            "species": "flying wyvern",
+            "name": "Black Diablos",
+            "description": "These black-shelled Diablos are actually female Diablos in heat. The color signals their aggressiveness and heightened hostility to other creatures in their habitat.",
+            "imageUrl": "https://static.wikia.nocookie.net/monsterhunterworld_gamepedia_en/images/f/f3/MHW_Black_Diablos_Icon.png"
+        }
+    ],
+    "totalPages": 1,
+    "currentPage": 1,
+    "totalData": 2,
+    "dataPerPage": 12
+}
+
+===============================================================================
+
+testing
+npx sequelize-cli db:create --env test
+npx sequelize-cli db:migrate --env test
+npx sequelize-cli db:seed:all --env test
+
+untuk bikin dari awal:
+npx sequelize-cli db:migrate:undo:all --env test
+npx sequelize-cli db:seed:undo:all --env test
+
+npm test user.test.js
+npm test monster.test.js

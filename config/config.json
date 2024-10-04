@@ -1,0 +1,21 @@
+{
+  "development": {
+    "username": "indra",
+    "password": "qwerasdf",
+    "database": "ip_mhw_db",
+    "host": "localhost",
+    "dialect": "postgres",
+    "port": 5432
+  },
+  "test": {
+    "username": "indra",
+    "password": "qwerasdf",
+    "database": "ip_mhw_db_test",
+    "host": "localhost",
+    "dialect": "postgres",
+    "port": 5432
+  },
+  "production": {
+    "use_env_variable": "DATABASE_URL"
+  }
+}

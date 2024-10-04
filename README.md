@@ -181,6 +181,43 @@ _Response (200)_
 },
 ```
 
+### POST /api/anime/store
+
+> Post user searched anime to anime database
+
+_Request Header_
+
+```
+not needed
+```
+
+_Request Body_
+
+```
+[
+  {
+    "mal_id": "<anime mal_id>",
+    "title": "<anime title>",
+    "genre": "<anime genre>"
+    "synopsis": "<anime synopsis>",
+    "episodes": "<anime episodes>",
+    "images": "<anime image>",
+    "score": "<anime score>",
+    ...
+  },
+  ...
+]
+
+```
+
+_Response (200)_
+
+```
+{
+  message: "Anime data stored successfully",
+},
+```
+
 ### GET /api/user/me
 
 > Get user profile data

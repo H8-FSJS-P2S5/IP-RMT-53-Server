@@ -23,7 +23,7 @@ router.post('/api/chat', ChatbotController.getAnimeRecommendation);
 // Anime routes
 router.get('/anime/search', jikanRateLimiter, AnimeController.searchAnime); // Search anime via Jikan API
 router.get('/anime/:id', jikanRateLimiter, AnimeController.getAnimeDetails); // Grab detailed information for a specific anime
-router.post('/api/anime/store', AnimeController.storeAnime); // Store new anime data
+router.post('/api/anime/store', jikanRateLimiter, AnimeController.storeAnime); // Store new anime data
 
 // Route for fetching the anime recommendation
 router.post('/api/recommendation', ChatbotController.getAnimeRecommendation);
